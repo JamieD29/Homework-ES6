@@ -19,9 +19,19 @@ const todoListEl = document.getElementById('todo');
 
 const completedListEl = document.getElementById('completed');
 
+const inputTodo = document.querySelector('#newTask');
+
+inputTodo.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+        addTodo();
+        localStorage.setItem('todos', JSON.stringify(todoList));
+    }
+});
+
 let addBtn = document.querySelector('#addItem').addEventListener("click", () => {
     addTodo();
     localStorage.setItem('todos', JSON.stringify(todoList));
+
 })
 
 function mapTodoList(local) {
@@ -40,7 +50,8 @@ function mapTodoList(local) {
 }
 
 function addTodo() {
-    const inputTodo = document.querySelector('#newTask').value;
+
+    const inputValue = inputTodo.value;
 
     let id = Math.floor(Math.random() * 1000);
 
@@ -52,11 +63,11 @@ function addTodo() {
 
 
     //Check if the todo is empty
-    const isEmpty = inputTodo === '';
+    const isEmpty = inputValue === '';
 
     //Check for duplicate todo 
     const isDuplicate =
-        todoList.some((todo) => todo.value === inputTodo);
+        todoList.some((todo) => todo.value === inputValue);
 
     if (isEmpty) {
         Swal.fire({
@@ -72,7 +83,7 @@ function addTodo() {
         })
     }
     else {
-        let task = new Todo(id, inputTodo);
+        let task = new Todo(id, inputValue);
         todoList.push(task);
         renderTodoList(todoListEl, todoList);
     }
@@ -135,12 +146,12 @@ window.deleteTodo = (id) => {
 
 }
 
-window.orderBy =  (key,tag) => { //name
+window.orderBy = (key, tag) => { //name
     let order = tag.getAttribute('data-order');
 
-    let arrayResult = _.orderBy(todoList, [key],[order]);
-    renderTodoList(todoListEl, arrayResult); 
+    let arrayResult = _.orderBy(todoList, [key], [order]);
+    renderTodoList(todoListEl, arrayResult);
 
-    let arrayCompletedResult = _.orderBy(completedList, [key],[order]);
-    renderTodoList(completedListEl, arrayCompletedResult); 
+    let arrayCompletedResult = _.orderBy(completedList, [key], []);
+    renderTodoList(completedListEl, arrayCompletedResult);
 }
