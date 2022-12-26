@@ -4,4 +4,5 @@
  
   Having an alphabet sort function with ascending and descending order 
  
-  I using lodash tool to do this function. ### [Lodash](https://lodash.com/docs/4.17.15#orderBy)
+  I using lodash tool to do this function. 
+  ## [Lodash](https://lodash.com/docs/4.17.15#orderBy)
