@@ -24,12 +24,14 @@ const inputTodo = document.querySelector('#newTask');
 inputTodo.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
         addTodo();
+        inputTodo.value = "";
         localStorage.setItem('todos', JSON.stringify(todoList));
     }
 });
 
 let addBtn = document.querySelector('#addItem').addEventListener("click", () => {
     addTodo();
+    inputTodo.value = "";
     localStorage.setItem('todos', JSON.stringify(todoList));
 
 })
