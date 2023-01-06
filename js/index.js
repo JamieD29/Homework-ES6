@@ -53,7 +53,7 @@ function mapTodoList(local) {
 
 function addTodo() {
 
-    const inputValue = inputTodo.value;
+    const inputValue = inputTodo.value.trim();
 
     let id = Math.floor(Math.random() * 1000);
 
